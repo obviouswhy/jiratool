@@ -14,7 +14,9 @@
   "author": "Sergi Nogal",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.0.1",
     "dotenv": "^16.0.0",
+    "inquirer": "^8.2.2",
     "node-fetch": "^3.2.3"
   }
 }
