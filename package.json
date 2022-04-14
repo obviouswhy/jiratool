@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
     "get-projects": "node src/services/project/get-projects.js",
     "create-project": "node src/services/project/create-project.js",
     "delete-project": "node src/services/project/delete-project.js",
