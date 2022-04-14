@@ -8,64 +8,46 @@ const endpoint = process.env.ENDPOINT
 const user = process.env.JIRA_USER
 const api_token = process.env.API_TOKEN
 
-const { summary, project_id, project_key } = args
+const { key, id } = args
 
-if (!project_id && !project_key) {
-  console.warn('Please provide a valid "project_key" or "project_id" value')
+if (!id && !key) {
+  console.warn('Please provide a valid "key" or "id" value')
   console.log(
-    'e.g. ->  npm run create-issue project_key=xxxxx or npm run create-issue project_id=xxxxx',
+    'e.g. ->  npm run delete-issue key=xxxxx or npm run delete-issue id=xxxxx',
   )
+
   process.exit(1)
 }
 
-if (!project_id && (!project_key || typeof project_key === 'boolean')) {
-  console.warn('Please provide a valid "project_key" value')
-  console.log('e.g. ->  npm run create-issue key=xxxxx')
+if (!id && (!key || typeof key === 'boolean')) {
+  console.warn('Please provide a valid "key" value')
+  console.log('e.g. ->  npm run delete-project key=xxxxx')
   process.exit(1)
 }
 
-if (!project_key && (!project_id || typeof project_id === 'boolean')) {
-  console.warn('Please provide a valid "project_id" value')
-  console.log('e.g. ->  npm run create-issue project_id=xxxxx')
+if (!key && (!id || typeof id === 'boolean')) {
+  console.warn('Please provide a valid "id" value')
+  console.log('e.g. ->  npm run delete-project id=xxxxx')
   process.exit(1)
 }
 
-if (!summary || typeof summary === 'boolean') {
-  console.warn('Please provide a valid "summary" value')
-  console.log(
-    'e.g. ->  npm run create-issue summary=xxxxx or npm run create-issue summary="xxxxx xxx xxxxx"',
-  )
-  process.exit(1)
-}
-
-const project = project_key ? { key: project_key } : { id: project_id }
-
-const bodyData = {
-  fields: {
-    project,
-    summary,
-    issuetype: {
-      name: 'Task',
-    },
-  },
-}
+const project_id_or_key = key ? key : id
 
 try {
-  console.log(bodyData)
-  const respose = await fetch(endpoint + '/rest/api/3/issue', {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${Buffer.from(user + ':' + api_token).toString(
-        'base64',
-      )}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+  const respose = await fetch(
+    endpoint + '/rest/api/3/issue/' + project_id_or_key,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Basic ${Buffer.from(user + ':' + api_token).toString(
+          'base64',
+        )}`,
+      },
     },
-    body: JSON.stringify(bodyData),
-  })
+  )
   console.log(`Response: ${respose.status} ${respose.statusText}`)
-  const resJson = await respose.json()
-  console.log(JSON.stringify(resJson))
+  const resText = await respose.text()
+  console.log(resText)
 } catch (err) {
   console.warn(err.message)
 }

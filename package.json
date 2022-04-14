@@ -9,6 +9,7 @@
     "create-project": "node src/services/project/create-project.js",
     "delete-project": "node src/services/project/delete-project.js",
     "create-issue": "node  src/services/issues/create-issue.js",
+    "delete-issue": "node  src/services/issues/delete-issue.js",
     "get-users": "node src/services/users/get-users.js"
   },
   "author": "Sergi Nogal",
