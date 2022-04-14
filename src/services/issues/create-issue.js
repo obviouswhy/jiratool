@@ -51,7 +51,6 @@ const bodyData = {
 }
 
 try {
-  console.log(bodyData)
   const respose = await fetch(endpoint + '/rest/api/3/issue', {
     method: 'POST',
     headers: {
