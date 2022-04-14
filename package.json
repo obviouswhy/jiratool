@@ -1,0 +1,20 @@
+{
+  "name": "jiratool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "get-projects": "node src/services/project/get-projects.js",
+    "create-project": "node src/services/project/create-project.js",
+    "delete-project": "node src/services/project/delete-project.js",
+    "create-issue": "node  src/services/issues/create-issue.js",
+    "get-users": "node src/services/users/get-users.js"
+  },
+  "author": "Sergi Nogal",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "node-fetch": "^3.2.3"
+  }
+}
