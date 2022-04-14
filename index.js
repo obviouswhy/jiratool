@@ -195,7 +195,7 @@ const handleCreateIssue = async () => {
       name: 'key',
       message: `Write the ${chalk.green.underline.bold(
         'Key',
-      )} of the ${chalk.bold('Issue')}: `,
+      )} of the ${chalk.bold('Project')}: `,
       when: answers => answers.type === `Project ${chalk.bold('Key')}`,
     },
     {
@@ -222,6 +222,49 @@ const handleCreateIssue = async () => {
 }
 
 // ________________________________________________________________________________
+// ________________________________ deleteIssue _________________________________
+// ________________________________________________________________________________
+
+const handleDeleteIssue = async () => {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'type',
+      message: 'Which field do you want to use?',
+      default: 0,
+      choices: [`Issue ${chalk.bold('ID')}`, `Issue ${chalk.bold('Key')}`],
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: `Write the ${chalk.green.underline.bold(
+        'ID',
+      )} of the ${chalk.bold('Issue')}: `,
+      when: answers => answers.type === `Issue ${chalk.bold('ID')}`,
+    },
+    {
+      type: 'input',
+      name: 'key',
+      message: `Write the ${chalk.green.underline.bold(
+        'Key',
+      )} of the ${chalk.bold('Issue')}: `,
+      when: answers => answers.type === `Issue ${chalk.bold('Key')}`,
+    },
+  ])
+
+  console.log('')
+
+  if (answer.key) {
+    return execSync(`npm run delete-issue key=${answer.key}`, {
+      stdio: 'inherit',
+    })
+  }
+  return execSync(`npm run delete-issue id=${answer.id}`, {
+    stdio: 'inherit',
+  })
+}
+
+// ________________________________________________________________________________
 // _____________________________________ Exit _____________________________________
 // ________________________________________________________________________________
 
@@ -242,10 +285,7 @@ const init = async () => {
         'Create a Jira Project',
         'Delete a Jira Project',
         'Create an Issue',
-        {
-          name: 'Delete an Issue',
-          disabled: 'Unavailable at this time',
-        },
+        'Delete an Issue',
         'Exit',
       ],
     },
@@ -263,4 +303,5 @@ if (action === 'Check User information') checkUserData()
 if (action === 'Create a Jira Project') handleCreateProject()
 if (action === 'Delete a Jira Project') handleDeleteProject()
 if (action === 'Create an Issue') handleCreateIssue()
+if (action === 'Delete an Issue') handleDeleteIssue()
 if (action === 'Exit') handleExit()
