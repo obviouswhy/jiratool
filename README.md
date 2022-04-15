@@ -109,8 +109,8 @@ $ npm run start
 
 ### Set and Preview User Information
 
-![JiraTool](https://im5.ezgif.com/tmp/ezgif-5-611ac0f5e0.gif)
+![JiraTool](https://i.imgur.com/sDw2E6i.gif)
 
 ### Create/Delete Project and Issue
 
-![JiraTool2](https://im4.ezgif.com/tmp/ezgif-4-4e9f8c69b0.gif)
+![JiraTool2](https://i.imgur.com/mU1Pw1e.gif)
